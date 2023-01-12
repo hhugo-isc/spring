@@ -18,6 +18,8 @@
   
   <bean id="myCricketCoach" class="com.hh.springdemo.CricketCoach">
   	<property name="fortuneService" ref="myFortune"></property>
+  	<property name="email" value="thebeastcoach@hh.com"></property>
+  	<property name="team" value="Sunrisers Hyderabad"></property>
   </bean>
 
 
