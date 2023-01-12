@@ -8,8 +8,10 @@
 </head>
 <body>
 	<h2>Hello world, from spring</h2>
+	<br><br>
 	Student name: ${param.studentName}
-	
+	<br><br>
+	The message: ${message}
 	
 </body>
 </html>
