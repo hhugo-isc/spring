@@ -10,7 +10,7 @@ public class Main {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SportConfig.class);
 
 //		get the bean from spring container
-		Coach coach = context.getBean("swimCoach", Coach.class);
+		SwimCoach coach = context.getBean("swimCoach", SwimCoach.class);
 
 //		call a method on the bean
 		System.out.println(coach.getDailyWorkout());
@@ -18,7 +18,12 @@ public class Main {
 //		cal method to get the daily fortune
 		System.out.println(coach.getDailyFortune());
 
+//		call our new swim coach methods .. has the props values injectes
+		System.out.println("email: " + coach.getEmail());
+		System.out.println("team: " + coach.getTeam());
+
 		context.close();
+
 	}
 
 }
