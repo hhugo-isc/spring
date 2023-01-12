@@ -7,6 +7,9 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
   
+  <!-- Load the properties file: sports.properties -->
+  <context:property-placeholder location="classpath:sport.properties"/>
+  
   <!-- Se define la dependencia -->
   <bean id="myFortune" class="com.hh.springdemo.HappyFortuneService"></bean>
 
@@ -18,10 +21,9 @@
   
   <bean id="myCricketCoach" class="com.hh.springdemo.CricketCoach">
   	<property name="fortuneService" ref="myFortune"></property>
-  	<property name="email" value="thebeastcoach@hh.com"></property>
-  	<property name="team" value="Sunrisers Hyderabad"></property>
+  	<property name="email" value="${foo.email}"></property>
+  	<property name="team" value="${foo.team}"></property>
   </bean>
-
 
   
 
