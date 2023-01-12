@@ -2,7 +2,7 @@ package com.hh.springconfigwithannotations;
 
 import org.springframework.stereotype.Component;
 
-@Component("thatSillyCoach")
+@Component
 public class TennisCoach implements Coach {
 
 	public String getDaylyWorkout() {
