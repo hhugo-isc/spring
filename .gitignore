@@ -12,6 +12,7 @@ local.properties
 
 libs/
 *.jar
+build/
 
 # External tool builders
 .externalToolBuilders/
