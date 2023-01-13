@@ -16,7 +16,7 @@ public class ReadStudentDemo {
 		Session session = factory.getCurrentSession();
 
 		try {
-//			use the session object to save a Java Object
+
 //			create a student object
 			System.out.println("Creando un nuevo objeto Estudiante");
 			Student tempStudent = new Student("Daffy", "Duck", "daffy@hh.com");
@@ -49,6 +49,7 @@ public class ReadStudentDemo {
 
 //			commit the transaction
 			session.getTransaction().commit();
+
 			System.out.println("Done!");
 		} catch (Exception e) {
 
