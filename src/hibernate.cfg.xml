@@ -1,0 +1,55 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- JDBC Datanase connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate?useSSL=false</property>
+		<property name="connection.username">hbstudent</property>
+		<property name="connection.password">hbstudent</property>
+
+
+		<!-- JDBC Connection pool settings ... using built-in test pool -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- Select our SQL dialect -->
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+
+		<!-- echo the SQL to stdout -->
+		<property name="show-sql">true</property>
+
+		<!-- Set the current session context -->
+		<property name="current_session_context_class">thread</property>
+
+	</session-factory>
+</hibernate-configuration>
+
+<!-- SET FOREIGN_KEYS = 0; -->
+
+<!-- create table instructor_detail ( -->
+<!-- 	id int(11) not null auto_increment, -->
+<!-- 	youtube_channel varchar(128) default null, -->
+<!-- 	hobby varchar(45) default null, -->
+<!-- 	PRIMARY KEY(id) -->
+<!-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; -->
+
+<!-- create table instructor ( -->
+<!-- 	id int(11) NOT NULL AUTO_INCREMENT, -->
+<!-- 	first_name varchar(45) default NULL, -->
+<!-- 	last_name varchar(45) default NULL, -->
+<!-- 	email varchar(45) default NULL, -->
+<!-- 	istructor_detail_id int(11) DEFAULT NULL,  -->
+<!-- 	PRIMARY KEY(id), -->
+<!-- 	KEY FK_DETAIL_idx (istructor_detail_id), -->
+<!-- 	CONSTRAINT FK_DETAIL FOREIGN KEY (istructor_detail_id)  -->
+<!-- 	REFERENCES instructor_detail (id)  -->
+<!-- 	ON DELETE NO ACTION ON UPDATE NO ACTION -->
+<!-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; -->
+
+<!-- SET FOREING_KEYS_CHECK = 1; -->
