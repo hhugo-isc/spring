@@ -1,4 +1,4 @@
-package com.hh.springmvcdemo;
+package com.hh.springmvcdemo.validacion;
 
 import javax.validation.Valid;
 
