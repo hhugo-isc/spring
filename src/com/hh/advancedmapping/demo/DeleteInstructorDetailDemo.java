@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.hh.advancedmapping.entity.Instructor;
 import com.hh.advancedmapping.entity.InstructorDetail;
 
-public class GetInstructorDetailDemo {
+public class DeleteInstructorDetailDemo {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
@@ -22,13 +22,21 @@ public class GetInstructorDetailDemo {
 //			retrieve instructor detail object from database
 			int instructorDetailId = 2;
 			InstructorDetail tmpInstructorDetail = session.get(InstructorDetail.class, instructorDetailId);
-//			print the instructor detail
+			// print the instructor detail
+
 			System.out.println("Instructor detail: " + tmpInstructorDetail);
-//			print the associated instructor
+
+			// print the associated instructor
 			System.out.println("Instryctor: " + tmpInstructorDetail.getInstructor());
-//			commit transaction
+
+//			now let's delete the instructor detail
+			System.out.println("Deleting tmpInstructorDetail: " + tmpInstructorDetail);
+			session.delete(tmpInstructorDetail);
+
+			// commit transaction
 			session.getTransaction().commit();
 			System.out.println("Done!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
