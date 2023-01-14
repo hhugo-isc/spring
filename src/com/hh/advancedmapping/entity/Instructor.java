@@ -29,7 +29,7 @@ public class Instructor {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "instructor_detail_id")
-	private InstructorDetail instructorDetailId;
+	private InstructorDetail instructorDetail;
 
 //	create constructors
 	public Instructor() {
@@ -75,17 +75,17 @@ public class Instructor {
 	}
 
 	public InstructorDetail getInstructorDetailId() {
-		return instructorDetailId;
+		return instructorDetail;
 	}
 
-	public void setInstructorDetailId(InstructorDetail instructorDetailId) {
-		this.instructorDetailId = instructorDetailId;
+	public void setInstructorDetailId(InstructorDetail instructorDetail) {
+		this.instructorDetail = instructorDetail;
 	}
 
 	@Override
 	public String toString() {
 		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", instructorDetailId=" + instructorDetailId + "]";
+				+ ", instructorDetail=" + instructorDetail + "]";
 	}
 
 }
