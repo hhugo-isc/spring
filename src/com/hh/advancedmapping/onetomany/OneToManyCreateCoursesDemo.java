@@ -1,4 +1,4 @@
-package com.hh.advancedmapping.demo;
+package com.hh.advancedmapping.onetomany;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,7 @@ import com.hh.advancedmapping.entity.Course;
 import com.hh.advancedmapping.entity.Instructor;
 import com.hh.advancedmapping.entity.InstructorDetail;
 
-public class OneToManyCreateInstructorDemo {
+public class OneToManyCreateCoursesDemo {
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class).addAnnotatedClass(Course.class).buildSessionFactory();
@@ -17,20 +17,27 @@ public class OneToManyCreateInstructorDemo {
 		try {
 
 //			create the objects
-			Instructor instructor = new Instructor("Susana", "Public", "susan@hh.com");
-			InstructorDetail detail = new InstructorDetail("http://www.youtube.com/", "Video Games");
 
 //			asociacion de los objetos
-			instructor.setInstructorDetailId(detail);
 
 //			start transaction
 			session.getTransaction().begin();
 
-//			save the instructor 
-//			NOTE: This will ALSO save the details object 
-//			because of CascadeType.ALL
-			System.out.println("saving instructor: " + instructor);
-			session.save(instructor);
+//			get the instructor from db
+			int instructorId = 1;
+			Instructor instructor = session.get(Instructor.class, instructorId);
+
+//			create some courses
+			Course tmpCourse1 = new Course("Air Guitar - The Ultimate Guide");
+			Course tmpCourse2 = new Course("The Oainball Masterclass");
+
+//			add courses to the instructor
+			instructor.addCourse(tmpCourse1);
+			instructor.addCourse(tmpCourse2);
+
+//			save the courses
+			session.save(tmpCourse1);
+			session.save(tmpCourse2);
 
 //			commit transaction
 			session.getTransaction().commit();

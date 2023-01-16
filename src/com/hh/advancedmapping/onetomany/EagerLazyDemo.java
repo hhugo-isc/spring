@@ -1,4 +1,4 @@
-package com.hh.advancedmapping.demo;
+package com.hh.advancedmapping.onetomany;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,7 @@ import com.hh.advancedmapping.entity.Course;
 import com.hh.advancedmapping.entity.Instructor;
 import com.hh.advancedmapping.entity.InstructorDetail;
 
-public class OneToManyCreateCoursesDemo {
+public class EagerLazyDemo {
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class).addAnnotatedClass(Course.class).buildSessionFactory();
@@ -16,31 +16,24 @@ public class OneToManyCreateCoursesDemo {
 		Session session = factory.getCurrentSession();
 		try {
 
-//			create the objects
-
-//			asociacion de los objetos
-
 //			start transaction
 			session.getTransaction().begin();
 
-//			get the instructor from db
+//			get the course from db
 			int instructorId = 1;
 			Instructor instructor = session.get(Instructor.class, instructorId);
 
-//			create some courses
-			Course tmpCourse1 = new Course("Air Guitar - The Ultimate Guide");
-			Course tmpCourse2 = new Course("The Oainball Masterclass");
+			System.out.println("Instructor: " + instructor);
 
-//			add courses to the instructor
-			instructor.addCourse(tmpCourse1);
-			instructor.addCourse(tmpCourse2);
-
-//			save the courses
-			session.save(tmpCourse1);
-			session.save(tmpCourse2);
+//			get courses form the instructor
 
 //			commit transaction
 			session.getTransaction().commit();
+
+//			close the session
+			session.close();
+			System.out.println("Courses: " + instructor.getCourses());
+
 			System.out.println("Done!");
 		} catch (Exception e) {
 			// TODO: handle exception
