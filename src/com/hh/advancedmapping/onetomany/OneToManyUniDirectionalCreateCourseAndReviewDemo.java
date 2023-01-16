@@ -20,15 +20,18 @@ public class OneToManyUniDirectionalCreateCourseAndReviewDemo {
 
 			session.beginTransaction();
 
-//			get the course
-			int courseId = 3;
-			Course tmpCourse = session.get(Course.class, courseId);
+//			create a course
+			Course tmpCourse = new Course("PACMAN - How To Score One Million Points");
 
-//			print the course
-			System.out.println(tmpCourse);
+//			add some reviews
+			tmpCourse.addReview(new Review("Great Course..."));
+			tmpCourse.addReview(new Review("Cool course, job well done"));
+			tmpCourse.addReview(new Review("What a dumb course, you are an idion!"));
 
-//			print the course reviews
+//			save the course ... and leverage the cascade all
+			System.out.println("Saving the course");
 			System.out.println(tmpCourse.getReviews());
+			session.save(tmpCourse);
 
 //			commit the transaction
 			session.getTransaction().commit();
