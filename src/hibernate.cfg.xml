@@ -30,7 +30,9 @@
 	</session-factory>
 </hibernate-configuration>
 
-<!--set foreign_key_checks=0 -->
+<!-- set foreign_key_checks=0 -->
+
+<!-- DROP TABLE  IF EXISTS instructor_detail; -->
 
 <!-- create table instructor_detail ( -->
 <!-- 	id int(11) not null auto_increment, -->
@@ -38,6 +40,8 @@
 <!-- 	hobby varchar(45) default null, -->
 <!-- 	PRIMARY KEY(id) -->
 <!-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; -->
+
+<!-- DROP TABLE  IF EXISTS instructor; -->
 
 <!-- create table instructor ( -->
 <!-- 	id int(11) NOT NULL AUTO_INCREMENT, -->
@@ -52,4 +56,18 @@
 <!-- 	ON DELETE NO ACTION ON UPDATE NO ACTION -->
 <!-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; -->
 
-<!-- set foreign_key_checks=0 -->
+<!-- DROP TABLE  IF EXISTS course; -->
+
+<!-- CREATE TABLE course ( -->
+<!-- 	id int(11) NOT NULL AUTO_INCREMENT, -->
+<!-- 	title varchar(128) DEFAULT NULL, -->
+<!-- 	instructor_id int(11) DEFAULT NULL, -->
+<!-- 	PRIMARY KEY (id), -->
+<!-- 	UNIQUE KEY TITLE_UNIQUE (title), -->
+<!-- 	CONSTRAINT FK_INSTRUCTOR  -->
+<!-- 	FOREIGN KEY (instructor_id) -->
+<!-- 	REFERENCES instructor (id) -->
+<!-- 	ON DELETE NO ACTION ON UPDATE NO ACTION -->
+<!-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; -->
+
+<!-- set foreign_key_checks=1 -->
