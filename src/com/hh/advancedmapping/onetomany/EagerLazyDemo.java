@@ -26,17 +26,18 @@ public class EagerLazyDemo {
 			System.out.println("Instructor: " + instructor);
 
 //			get courses form the instructor
+			System.out.println("Courses: " + instructor.getCourses());
 
 //			commit transaction
 			session.getTransaction().commit();
 
 //			close the session
 			session.close();
+			System.out.println("Closing the session\n");
+
 			System.out.println("Courses: " + instructor.getCourses());
 
 			System.out.println("Done!");
-		} catch (Exception e) {
-			// TODO: handle exception
 		} finally {
 			session.close();
 			factory.close();

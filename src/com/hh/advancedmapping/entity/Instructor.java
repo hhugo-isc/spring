@@ -37,7 +37,7 @@ public class Instructor {
 	private InstructorDetail instructorDetail;
 
 	@OneToMany(mappedBy = "instructor", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH }, fetch = FetchType.EAGER)
+			CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	private List<Course> courses;
 
 //	create constructors
