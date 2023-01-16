@@ -1,4 +1,4 @@
-package com.hh.advancedmapping.demo;
+package com.hh.advancedmapping.onetoone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

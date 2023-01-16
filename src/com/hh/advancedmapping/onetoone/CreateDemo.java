@@ -1,4 +1,4 @@
-package com.hh.advancedmapping.demo;
+package com.hh.advancedmapping.onetoone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.hh.advancedmapping.entity.Instructor;
 import com.hh.advancedmapping.entity.InstructorDetail;
 
-public class GetInstructorDetailDemo {
+public class CreateDemo {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
@@ -16,23 +16,29 @@ public class GetInstructorDetailDemo {
 		Session session = factory.getCurrentSession();
 		try {
 
+//			creacion de los objetos
+
+			Instructor instructor = new Instructor("Madhu", "Patel", "madhu@hh.com");
+			InstructorDetail detail = new InstructorDetail("http://www.youtube.com/", "Guitar");
+
+//			asociacion de los objetos
+			instructor.setInstructorDetailId(detail);
+
 //			start transaction
 			session.getTransaction().begin();
 
-//			retrieve instructor detail object from database
-			int instructorDetailId = 2;
-			InstructorDetail tmpInstructorDetail = session.get(InstructorDetail.class, instructorDetailId);
-//			print the instructor detail
-			System.out.println("Instructor detail: " + tmpInstructorDetail);
-//			print the associated instructor
-			System.out.println("Instryctor: " + tmpInstructorDetail.getInstructor());
+//			save the instructor 
+//			NOTE: This will ALSO save the details object 
+//			because of CascadeType.ALL
+			System.out.println("saving instructor: " + instructor);
+			session.save(instructor);
+
 //			commit transaction
 			session.getTransaction().commit();
 			System.out.println("Done!");
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
-			session.close();
 			factory.close();
 		}
 	}

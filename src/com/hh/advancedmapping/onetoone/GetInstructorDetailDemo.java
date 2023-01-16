@@ -1,4 +1,4 @@
-package com.hh.advancedmapping.demo;
+package com.hh.advancedmapping.onetoone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.hh.advancedmapping.entity.Instructor;
 import com.hh.advancedmapping.entity.InstructorDetail;
 
-public class DeleteDemo {
+public class GetInstructorDetailDemo {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
@@ -19,26 +19,20 @@ public class DeleteDemo {
 //			start transaction
 			session.getTransaction().begin();
 
-//			get the instructor by primary key / id
-			int theId = 1;
-			Instructor instructor = session.get(Instructor.class, theId);
-
-			System.out.println("Found Instructor: " + instructor);
-
-//			delete the instructor
-
-			if (instructor != null) {
-				System.out.println("Deleting instructor: " + instructor);
-//				Will also delete associated "details" object
-//				because of CascadeType.ALL
-				session.delete(instructor);
-			}
+//			retrieve instructor detail object from database
+			int instructorDetailId = 2;
+			InstructorDetail tmpInstructorDetail = session.get(InstructorDetail.class, instructorDetailId);
+//			print the instructor detail
+			System.out.println("Instructor detail: " + tmpInstructorDetail);
+//			print the associated instructor
+			System.out.println("Instryctor: " + tmpInstructorDetail.getInstructor());
 //			commit transaction
 			session.getTransaction().commit();
 			System.out.println("Done!");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		} finally {
+			session.close();
 			factory.close();
 		}
 	}
