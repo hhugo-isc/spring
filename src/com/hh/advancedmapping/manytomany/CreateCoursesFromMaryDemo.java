@@ -10,7 +10,7 @@ import com.hh.advancedmapping.entity.InstructorDetail;
 import com.hh.advancedmapping.entity.Review;
 import com.hh.advancedmapping.entity.Student;
 
-public class AddCoursesFromMaryDemo {
+public class CreateCoursesFromMaryDemo {
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class).addAnnotatedClass(Course.class)
@@ -19,30 +19,30 @@ public class AddCoursesFromMaryDemo {
 
 		try {
 
+//			start transaction
 			session.beginTransaction();
 
-//			create a course
-			Course course = new Course("Pacman - How to Score One Million Points");
+//			get student mary from db
+			int studentId = 2;
+			Student tmpStudent = session.get(Student.class, studentId);
 
-//			save course ... and 
-			System.out.println("Saving the course");
-			session.save(course);
-			System.out.println("Saved Course: " + course);
+			System.out.println("\nLoaded student: " + tmpStudent);
+			System.out.println("Courses: " + tmpStudent.getCourses());
 
-//			create students
-			Student tmpStudent1 = new Student("John", "Doe", "john@hh.com");
-			Student tmpStudent2 = new Student("Mary", "Public", "maty@hh.com");
+//			create more courses
+			Course tmpCourse1 = new Course("Rubik's Cube - How To Speed Cube");
+			Course tmpCourse2 = new Course("Atari 2060 - Game Development");
 
-//			add students to the course
-			course.addStudent(tmpStudent1);
-			course.addStudent(tmpStudent2);
+//			add student to courses
+			tmpCourse1.addStudent(tmpStudent);
+			tmpCourse2.addStudent(tmpStudent);
 
-//			save the students
-			System.out.println("Saving students");
-			session.save(tmpStudent1);
-			session.save(tmpStudent2);
-			System.out.println("Saved students: " + course.getStudentns());
+//			save the courses
+			System.out.println("\nSaving the courses...");
+			session.save(tmpCourse1);
+			session.save(tmpCourse2);
 
+//			commit transaction
 			session.getTransaction().commit();
 			System.out.println("Done");
 
