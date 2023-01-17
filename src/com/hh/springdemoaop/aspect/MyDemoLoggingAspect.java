@@ -1,9 +1,10 @@
 package com.hh.springdemoaop.aspect;
 
+import java.util.List;
+
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -75,26 +76,36 @@ public class MyDemoLoggingAspect {
 //	public void forDaoPackageAndExludeGetterAndSetter() {
 //	}
 
-	@Before("com.hh.springdemoaop.aspect.LuvAopExpressions.forDaoPackageAndExludeGetterAndSetter()")
-	public void beforeAddAccountAdvice(JoinPoint joinpoint) {
-		System.out.println("\n----->>> Executing @Before advice on method");
+//	@Before("com.hh.springdemoaop.aspect.LuvAopExpressions.forDaoPackageAndExludeGetterAndSetter()")
+//	public void beforeAddAccountAdvice(JoinPoint joinpoint) {
+//		System.out.println("\n----->>> Executing @Before advice on method");
+//
+////		display the method signature
+//		MethodSignature methodSignature = (MethodSignature) joinpoint.getSignature();
+//		System.out.println("Method Signature: " + methodSignature.toString());
+//
+////		display method arguments
+////		get args
+//		Object[] args = joinpoint.getArgs();
+////		loop thru args
+//		for (Object arg : args) {
+//			System.out.println("Arg: " + arg);
+//			if (arg instanceof Account) {
+//				Account account = (Account) arg;
+//				System.out.println("Account name: " + account.getName());
+//				System.out.println("Account level: " + account.getLevel());
+//			}
+//		}
+//	}
 
-//		display the method signature
-		MethodSignature methodSignature = (MethodSignature) joinpoint.getSignature();
-		System.out.println("Method Signature: " + methodSignature.toString());
-
-//		display method arguments
-//		get args
-		Object[] args = joinpoint.getArgs();
-//		loop thru args
-		for (Object arg : args) {
-			System.out.println("Arg: " + arg);
-			if (arg instanceof Account) {
-				Account account = (Account) arg;
-				System.out.println("Account name: " + account.getName());
-				System.out.println("Account level: " + account.getLevel());
-			}
-		}
+//	add a new advice for @AfterReturning on the findAccounts method
+	@AfterReturning(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", returning = "result")
+	public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
+//		print out what method we are advising on
+		String method = joinPoint.getSignature().toShortString();
+		System.out.println("\n=========>>> Executing @AfterReturning on method: " + method);
+//		print out the results of the method call
+		System.out.println("\n=========>>> result is: " + result);
 	}
 
 }
