@@ -2,11 +2,12 @@ package com.hh.springdemoaop.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
+@Order(2)
 public class MyDemoLoggingAspect {
 
 //	this is where we add all of our related advices for logging
@@ -54,30 +55,25 @@ public class MyDemoLoggingAspect {
 //		System.out.println("\n----->>> Performing API Analytics");
 //	}
 
-	@Pointcut("execution(* com.hh.springdemoaop.dao.*.*(..))")
-	public void forDaoPackage() {
-	}
+//	@Pointcut("execution(* com.hh.springdemoaop.dao.*.*(..))")
+//	public void forDaoPackage() {
+//	}
+//
+//	@Pointcut("execution(* com.hh.springdemoaop.dao.*.get*(..))")
+//	public void getter() {
+//	}
+//
+//	@Pointcut("execution(* com.hh.springdemoaop.dao.*.set*(..))")
+//	public void setter() {
+//	}
+//
+//	@Pointcut("forDaoPackage() && !(getter() || setter())")
+//	public void forDaoPackageAndExludeGetterAndSetter() {
+//	}
 
-	@Pointcut("execution(* com.hh.springdemoaop.dao.*.get*(..))")
-	public void getter() {
-	}
-
-	@Pointcut("execution(* com.hh.springdemoaop.dao.*.set*(..))")
-	public void setter() {
-	}
-
-	@Pointcut("forDaoPackage() && !(getter() || setter())")
-	public void forDaoPackageAndExludeGetterAndSetter() {
-	}
-
-	@Before("forDaoPackageAndExludeGetterAndSetter()")
+	@Before("com.hh.springdemoaop.aspect.LuvAopExpressions.forDaoPackageAndExludeGetterAndSetter()")
 	public void beforeAddAccountAdvice() {
 		System.out.println("\n----->>> Executing @Before advice on method");
-	}
-
-	@Before("forDaoPackageAndExludeGetterAndSetter()")
-	public void performApiAnalytics() {
-		System.out.println("\n----->>> Performing API Analytics");
 	}
 
 }
