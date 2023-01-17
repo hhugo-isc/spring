@@ -1,9 +1,13 @@
 package com.hh.springdemoaop.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.hh.springdemoaop.Account;
 
 @Component
 @Aspect
@@ -72,8 +76,25 @@ public class MyDemoLoggingAspect {
 //	}
 
 	@Before("com.hh.springdemoaop.aspect.LuvAopExpressions.forDaoPackageAndExludeGetterAndSetter()")
-	public void beforeAddAccountAdvice() {
+	public void beforeAddAccountAdvice(JoinPoint joinpoint) {
 		System.out.println("\n----->>> Executing @Before advice on method");
+
+//		display the method signature
+		MethodSignature methodSignature = (MethodSignature) joinpoint.getSignature();
+		System.out.println("Method Signature: " + methodSignature.toString());
+
+//		display method arguments
+//		get args
+		Object[] args = joinpoint.getArgs();
+//		loop thru args
+		for (Object arg : args) {
+			System.out.println("Arg: " + arg);
+			if (arg instanceof Account) {
+				Account account = (Account) arg;
+				System.out.println("Account name: " + account.getName());
+				System.out.println("Account level: " + account.getLevel());
+			}
+		}
 	}
 
 }
