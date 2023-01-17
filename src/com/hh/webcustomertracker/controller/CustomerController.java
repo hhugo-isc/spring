@@ -8,21 +8,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hh.webcustomertracker.dao.CustomerDao;
 import com.hh.webcustomertracker.entity.Customer;
+import com.hh.webcustomertracker.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
-	private CustomerDao repository;
+	private CustomerService customerService;
 
 	@GetMapping("/list")
 	public String getCustomers(Model model) {
-		List<Customer> customers = repository.getCustomers();
+		List<Customer> customers = customerService.getCustomers();
 		model.addAttribute("customers", customers);
 		return "list-customers";
+	}
+
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model model) {
+		Customer customer = new Customer();
+		model.addAttribute("customer", customer);
+		return "customer-form";
 	}
 
 }
