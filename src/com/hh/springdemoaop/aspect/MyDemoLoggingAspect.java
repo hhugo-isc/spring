@@ -23,7 +23,12 @@ public class MyDemoLoggingAspect {
 //		System.out.println("\n----->>> Executing @Before advice on method");
 //	}
 
-	@Before("execution(* add*(com.hh.springdemoaop.Account, ..))")
+//	@Before("execution(* add*(com.hh.springdemoaop.Account, ..))")
+//	public void beforeAddAccountAdviceWithAccountParam() {
+//		System.out.println("\n----->>> Executing @Before advice on method");
+//	}
+
+	@Before("execution(* add*(..))")
 	public void beforeAddAccountAdviceWithAccountParam() {
 		System.out.println("\n----->>> Executing @Before advice on method");
 	}
