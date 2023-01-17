@@ -21,7 +21,7 @@ public class Main {
 		accountDao.addAccount();
 
 //		call the membership method
-		membershipDAO.addAccount();
+		membershipDAO.addSillyMember();
 
 //		close the context
 		context.close();

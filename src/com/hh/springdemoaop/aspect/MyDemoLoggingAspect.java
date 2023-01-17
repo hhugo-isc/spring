@@ -12,7 +12,7 @@ public class MyDemoLoggingAspect {
 
 //	let's start with an @before advice
 //	@Before("execution(public void updateAccount())")
-	@Before("execution(public void com.hh.springdemoaop.dao.AccountDao.addAccount())")
+	@Before("execution(public void add*())")
 	public void beforeAddAccountAdvice() {
 		System.out.println("\n----->>> Executing @Before advice on method");
 	}
