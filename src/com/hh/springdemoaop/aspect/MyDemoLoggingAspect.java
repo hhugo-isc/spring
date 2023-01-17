@@ -25,31 +25,57 @@ public class MyDemoLoggingAspect {
 //	}
 
 //	@Before("execution(* add*(com.hh.springdemoaop.Account, ..))")
-//	public void beforeAddAccountAdviceWithAccountParam() {
+//	public void beforeAddAccountAdvice() {
 //		System.out.println("\n----->>> Executing @Before advice on method");
 //	}
 
 //	@Before("execution(* add*(..))")
-//	public void beforeAddAccountAdviceWithAccountParam() {
+//	public void beforeAddAccountAdvice() {
 //		System.out.println("\n----->>> Executing @Before advice on method");
 //	}
 
 //	@Before("execution(* com.hh.springdemoaop.dao.*.*(..))")
-//	public void beforeAddAccountAdviceWithAccountParam() {
+//	public void beforeAddAccountAdvice() {
 //		System.out.println("\n----->>> Executing @Before advice on method");
+//	}
+
+//	@Pointcut("execution(* com.hh.springdemoaop.dao.*.*(..))")
+//	public void forDaoPackage() {
+//
+//	}
+//
+//	@Before("forDaoPackage()")
+//	public void beforeAddAccountAdvice() {
+//		System.out.println("\n----->>> Executing @Before advice on method");
+//	}
+//
+//	@Before("forDaoPackage()")
+//	public void performApiAnalytics() {
+//		System.out.println("\n----->>> Performing API Analytics");
 //	}
 
 	@Pointcut("execution(* com.hh.springdemoaop.dao.*.*(..))")
 	public void forDaoPackage() {
-
 	}
 
-	@Before("forDaoPackage()")
-	public void beforeAddAccountAdviceWithAccountParam() {
+	@Pointcut("execution(* com.hh.springdemoaop.dao.*.get*(..))")
+	public void getter() {
+	}
+
+	@Pointcut("execution(* com.hh.springdemoaop.dao.*.set*(..))")
+	public void setter() {
+	}
+
+	@Pointcut("forDaoPackage() && !(getter() || setter())")
+	public void forDaoPackageAndExludeGetterAndSetter() {
+	}
+
+	@Before("forDaoPackageAndExludeGetterAndSetter()")
+	public void beforeAddAccountAdvice() {
 		System.out.println("\n----->>> Executing @Before advice on method");
 	}
 
-	@Before("forDaoPackage()")
+	@Before("forDaoPackageAndExludeGetterAndSetter()")
 	public void performApiAnalytics() {
 		System.out.println("\n----->>> Performing API Analytics");
 	}
