@@ -11,4 +11,9 @@ public class AccountDao {
 		System.out.println(getClass() + ": DOING MY DB WORK: ADDING AN ACCONT");
 	}
 
+	public boolean doWork() {
+		System.out.println(getClass() + ": doWork()");
+		return false;
+	}
+
 }
