@@ -7,7 +7,7 @@ import com.hh.springdemoaop.Account;
 @Component
 public class AccountDao {
 
-	public void addAccount(Account account) {
+	public void addAccount(Account account, boolean vipFlag) {
 		System.out.println(getClass() + ": DOING MY DB WORK: ADDING AN ACCONT");
 	}
 
