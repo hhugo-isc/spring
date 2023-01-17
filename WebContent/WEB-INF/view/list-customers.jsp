@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css"/>
 <title>List Customers</title>
 </head>
 <body>
 
-	List Customers - comming son ....
+
 	<div id="wrapper">
-		<div id="header"></div>
+		<div id="header"><h2>CRM - Customer Relationship Manager</h2></div>
 	</div>
 
 	<div id="container">
@@ -22,15 +24,15 @@
 					<th>Last Name</th>
 					<th>Email</th>
 				</tr>
-				<ul>
-					<c:forEach var="customer" items="${customers }">
-						<tr>
-							<td>${customer.firstName }</td>
-							<td>${customer.lastName }</td>
-							<td>${customer.email }</td>
-						</tr>
-					</c:forEach>
-				</ul>
+
+				<c:forEach var="customer" items="${customers }">
+					<tr>
+						<td>${customer.firstName }</td>
+						<td>${customer.lastName }</td>
+						<td>${customer.email }</td>
+					</tr>
+				</c:forEach>
+
 			</table>
 		</div>
 	</div>
