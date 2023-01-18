@@ -147,7 +147,15 @@ public class MyLoggingAspect {
 		long beginTimeStamp = System.currentTimeMillis();
 
 //		now, let's execute the method
-		Object result = joinPoint.proceed();
+		Object result = null;
+		try {
+			result = joinPoint.proceed();
+		} catch (Exception e) {
+//			log exception
+			myLogger.warning(e.getMessage());
+//			give user a custom message
+			result = "Major Accident! But no worries, your private AOP helicopter is on the way";
+		}
 
 //		get end timestamp
 		long endTimesTamp = System.currentTimeMillis();
