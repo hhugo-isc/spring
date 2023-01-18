@@ -150,21 +150,23 @@ public class MyLoggingAspect {
 		Object result = null;
 		try {
 			result = joinPoint.proceed();
+			return result;
 		} catch (Exception e) {
 //			log exception
 			myLogger.warning(e.getMessage());
 //			give user a custom message
-			result = "Major Accident! But no worries, your private AOP helicopter is on the way";
+//			result = "Major Accident! But no worries, your private AOP helicopter is on the way";
+			throw e;
 		}
 
-//		get end timestamp
-		long endTimesTamp = System.currentTimeMillis();
+////		get end timestamp
+//		long endTimesTamp = System.currentTimeMillis();
+//
+////		compute duration and display it
+//		long duration = endTimesTamp - beginTimeStamp;
+//		myLogger.info("\n=========>>> Duration: " + duration / 1000.0 + " seconds");
 
-//		compute duration and display it
-		long duration = endTimesTamp - beginTimeStamp;
-		myLogger.info("\n=========>>> Duration: " + duration / 1000.0 + " seconds");
-
-		return result;
+//		return result;
 	}
 
 }
