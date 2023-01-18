@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.hh.springdemoaop.dao.AccountDao;
 import com.hh.springdemoaop.dao.MembershipDAO;
 
-public class Main {
+public class BeforeDemo {
 
 	public static void main(String[] args) {
 //		read spring config java class

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.hh.springdemoaop.dao.AccountDao;
 
-public class AfterReturningDemoApp {
+public class AfterThrowingDemo {
 
 	public static void main(String[] args) {
 //		read spring config java class
@@ -16,10 +16,18 @@ public class AfterReturningDemoApp {
 		AccountDao accountDao = context.getBean("accountDao", AccountDao.class);
 
 //		call method to find the accounts
-		List<Account> accounts = accountDao.findAccounts(false);
+		List<Account> accounts = null;
+
+		try {
+//			add a boolean flag to simulate exceptions
+			boolean tripWire = true;
+			accounts = accountDao.findAccounts(tripWire);
+		} catch (Exception e) {
+			System.out.println("\n\nMain Program ... caught exception: " + e);
+		}
 
 //		display the accounts
-		System.out.println("\n\nMain program: AfterReturningDemoApp");
+		System.out.println("\n\nMain program: AfterThrowingDemoApp");
 		System.out.println("-----");
 		System.out.println(accounts);
 		System.out.println("\n");
