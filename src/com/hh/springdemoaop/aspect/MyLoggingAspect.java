@@ -3,6 +3,7 @@ package com.hh.springdemoaop.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -116,6 +117,12 @@ public class MyLoggingAspect {
 
 	}
 
+	private void convertNameToUpperCase(List<Account> result) {
+		for (Account account : result) {
+			account.setName(account.getName().toUpperCase());
+		}
+	}
+
 	@AfterThrowing(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", throwing = "ex")
 	public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable ex) {
 //		print out which method we are advising on
@@ -125,10 +132,11 @@ public class MyLoggingAspect {
 		System.out.println("\n=========>>> The exception is: " + ex);
 	}
 
-	private void convertNameToUpperCase(List<Account> result) {
-		for (Account account : result) {
-			account.setName(account.getName().toUpperCase());
-		}
+	@After("execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))")
+	public void afterFinallyFindAccountsAdvide(JoinPoint joinPoint) {
+//		print out which method we are advising on
+		String method = joinPoint.getSignature().toShortString();
+		System.out.println("\n=========>>> Executing @After (finally) on method: " + method);
 	}
 
 }
