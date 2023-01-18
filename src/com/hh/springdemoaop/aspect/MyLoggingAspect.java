@@ -1,23 +1,19 @@
 package com.hh.springdemoaop.aspect;
 
-import java.util.List;
+import java.util.logging.Logger;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.hh.springdemoaop.Account;
-
 @Component
 @Aspect
 @Order(2)
 public class MyLoggingAspect {
+
+	private Logger myLogger = Logger.getLogger(MyLoggingAspect.class.getName());
 
 //	this is where we add all of our related advices for logging
 
@@ -103,49 +99,49 @@ public class MyLoggingAspect {
 //	}
 
 //	add a new advice for @AfterReturning on the findAccounts method
-	@AfterReturning(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", returning = "result")
-	public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
-//		print out what method we are advising on
-		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=========>>> Executing @AfterReturning on method: " + method);
-//		print out the results of the method call
-		System.out.println("\n=========>>> result is: " + result);
-
-//		let's post-process the data ... let's modify it :-
-//		convert the account name to uppercase
-		convertNameToUpperCase(result);
-
-		System.out.println("\n=========>>> result is: " + result);
-
-	}
-
-	private void convertNameToUpperCase(List<Account> result) {
-		for (Account account : result) {
-			account.setName(account.getName().toUpperCase());
-		}
-	}
-
-	@AfterThrowing(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", throwing = "ex")
-	public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable ex) {
-//		print out which method we are advising on
-		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=========>>> Executing @AfterThrowing on method: " + method);
-//		log the exception
-		System.out.println("\n=========>>> The exception is: " + ex);
-	}
-
-	@After("execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))")
-	public void afterFinallyFindAccountsAdvide(JoinPoint joinPoint) {
-//		print out which method we are advising on
-		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=========>>> Executing @After (finally) on method: " + method);
-	}
+//	@AfterReturning(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", returning = "result")
+//	public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
+////		print out what method we are advising on
+//		String method = joinPoint.getSignature().toShortString();
+//		System.out.println("\n=========>>> Executing @AfterReturning on method: " + method);
+////		print out the results of the method call
+//		System.out.println("\n=========>>> result is: " + result);
+//
+////		let's post-process the data ... let's modify it :-
+////		convert the account name to uppercase
+//		convertNameToUpperCase(result);
+//
+//		System.out.println("\n=========>>> result is: " + result);
+//
+//	}
+//
+//	private void convertNameToUpperCase(List<Account> result) {
+//		for (Account account : result) {
+//			account.setName(account.getName().toUpperCase());
+//		}
+//	}
+//
+//	@AfterThrowing(pointcut = "execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))", throwing = "ex")
+//	public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable ex) {
+////		print out which method we are advising on
+//		String method = joinPoint.getSignature().toShortString();
+//		System.out.println("\n=========>>> Executing @AfterThrowing on method: " + method);
+////		log the exception
+//		System.out.println("\n=========>>> The exception is: " + ex);
+//	}
+//
+//	@After("execution(* com.hh.springdemoaop.dao.AccountDao.findAccounts(..))")
+//	public void afterFinallyFindAccountsAdvide(JoinPoint joinPoint) {
+////		print out which method we are advising on
+//		String method = joinPoint.getSignature().toShortString();
+//		System.out.println("\n=========>>> Executing @After (finally) on method: " + method);
+//	}
 
 	@Around("execution(* com.hh.springdemoaop.service.*.getFortune(..))")
 	public Object arroundGetFortune(ProceedingJoinPoint joinPoint) throws Throwable {
 //		print out the method we are advising
 		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=========>>> Executing @Around on method: " + method);
+		myLogger.info("\n=========>>> Executing @Around on method: " + method);
 
 //		get begin timestamp
 		long beginTimeStamp = System.currentTimeMillis();
@@ -158,7 +154,7 @@ public class MyLoggingAspect {
 
 //		compute duration and display it
 		long duration = endTimesTamp - beginTimeStamp;
-		System.out.println("\n=========>>> Duration: " + duration / 1000.0 + " seconds");
+		myLogger.info("\n=========>>> Duration: " + duration / 1000.0 + " seconds");
 
 		return result;
 	}
