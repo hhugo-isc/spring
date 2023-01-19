@@ -12,7 +12,6 @@
 		<springsecurity.version>5.0.0.RELEASE</springsecurity.version>
 	</properties>
 	<dependencies>
-		
 		<!-- Spring Security  -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -30,12 +29,23 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-		
 		<!-- Spring Mvc Support-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
+		</dependency>
+		<!-- MySQL JDBC Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.45</version>
+		</dependency>
+		<!-- C3P0 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
 		</dependency>
 		<!--Servlet, JSP and JSTL Support -->
 		<dependency>
