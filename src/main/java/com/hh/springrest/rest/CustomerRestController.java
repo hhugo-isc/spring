@@ -3,6 +3,7 @@ package com.hh.springrest.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +56,16 @@ public class CustomerRestController {
 //		this is force a save of new item ... instead of update
 		customerService.saveCustomer(customer);
 		return customer;
+	}
+
+//	add mapping for DELETE /customers/{customerId} - delete a customer
+	@DeleteMapping("/customers/{customerId}")
+	public String deleteCustomer(@PathVariable("customerId") int customerId) {
+//		find out if the customer exists in the db
+		Customer customer = customerService.getCustomer(customerId);
+		if (customer == null) {
+			throw new CustomerNotFoundException("Customer not found id - " + customerId);
+		}
+		return "Deleted customer id - " + customerId;
 	}
 }
