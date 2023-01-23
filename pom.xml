@@ -11,7 +11,7 @@
 	<groupId>com.hh</groupId>
 	<artifactId>springbootdemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>16-SpringBootDemo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -42,17 +42,6 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 		
-		<!-- ADD Support for Spring Boot Actuator -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		
-		<!-- ADD Suport for Spring Boot Starter Security-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
 		
 	</dependencies>
 
